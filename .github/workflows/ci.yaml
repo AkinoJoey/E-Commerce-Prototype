@@ -20,9 +20,8 @@ jobs:
         ports:
           - "3306:3306"
         env:
-          MYSQL_ROOT_PASSWORD: 1234
-          MYSQL_ROOT_HOST: '%'
-        options: --health-cmd "mysqladmin ping -h 127.0.0.1" --health-interval 20s --health-timeout 10s --health-retries 10
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
