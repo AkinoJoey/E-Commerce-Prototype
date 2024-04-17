@@ -51,9 +51,9 @@ group :development, :test do
   gem 'brakeman'
   gem 'bundler-audit'
   gem 'debug', platforms: %i[mri windows]
-  gem 'rubocop'
-  gem 'rubocop-capybara'
-  gem 'rubocop-rails'
+  gem 'rubocop', require: false
+  gem 'rubocop-capybara', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :development do
