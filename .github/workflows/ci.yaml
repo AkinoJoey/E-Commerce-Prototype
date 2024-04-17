@@ -41,7 +41,7 @@ jobs:
           bundle install --jobs 4 --retry 3
       - name: Set up database
         run: |
-          cp config/database.yml.ci config/database.yml
+          cp config/database.yaml.ci config/database.yml
           sudo /etc/init.d/mysql start
           bundle exec rails db:create
           bundle exec rails db:schema:load
