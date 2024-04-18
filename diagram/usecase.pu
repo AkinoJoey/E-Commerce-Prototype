@@ -2,7 +2,7 @@
 left to right direction
 actor ログインユーザー as loginUser
 actor ゲスト as guest
-actor 管理者 as admin
+actor 管理者ユーザー as admin
 actor システム as system
 
 package Eコマースアプリ{
@@ -10,19 +10,23 @@ package Eコマースアプリ{
 (商品一覧を見る) as viewProducts
 (商品をフィルタリングする) as fiterProducts
 (商品の詳細を見る) as viewProductDetails
-(カートに商品を追加する) as addProductToCard
+(カートに商品を追加する) as addProductToCart
+(カート内の商品を編集する) as editProductInCart
 (商品を購入する) as purchaseProduct
 (商品を評価する) as rateProduct
 (商品にコメントをする) as commentToProduct
-(カート内の商品を編集する) as editProductInCard
-(ログイン/ログアウトする) as loginLogout
-(購入履歴を閲覧する) as viewPurchaseHistory
-(領収書を保存する) as saveRecipt
-(会員情報を作成する) as makeCustomerInfo
-(会員情報を編集する) as editCustomerInfo
-(商品をお気に入りリストに追加する) as addProductToFavoriteList
-(商品をウィッシュリスト（お気に入りリスト）に追加する) as addProductToWishList
-(ウィッシュリストを他の人に共有する) as shareWishList
+
+package ログインユーザーのみ{
+    (ログイン/ログアウトする) as loginLogout
+    (購入履歴を閲覧する) as viewPurchaseHistory
+    (領収書を保存する) as saveRecipt
+    (会員情報を作成する) as makeCustomerInfo
+    (会員情報を編集する) as editCustomerInfo
+    (商品をお気に入りリストに追加する) as addProductToFavoriteList
+    (商品をウィッシュリスト（欲しいものリスト）に追加する) as addProductToWishList
+    (ウィッシュリストを他の人に共有する) as shareWishList
+}
+
 
 (商品を作成する) as addProduct
 (商品を削除する) as removeProduct
@@ -40,16 +44,16 @@ package デジタル製品{
 
 }
 
-
+loginUser --> guest
 loginUser --> searchProducts
 loginUser --> viewProducts
 loginUser --> fiterProducts
 loginUser --> viewProductDetails
-loginUser --> addProductToCard
+loginUser --> addProductToCart
+loginUser --> editProductInCart
 loginUser --> purchaseProduct
 loginUser --> rateProduct
 loginUser --> commentToProduct
-loginUser --> editProductInCard
 loginUser --> loginLogout
 loginUser --> viewPurchaseHistory
 loginUser --> saveRecipt
@@ -63,11 +67,11 @@ guest --> searchProducts
 guest --> viewProducts
 guest --> fiterProducts
 guest --> viewProductDetails
-guest --> addProductToCard
+guest --> addProductToCart
+guest --> editProductInCart
 guest --> purchaseProduct
 guest --> rateProduct
 guest --> commentToProduct
-guest --> editProductInCard
 
 addProduct <-- admin
 removeProduct <-- admin
