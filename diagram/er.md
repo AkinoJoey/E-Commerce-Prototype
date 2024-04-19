@@ -5,7 +5,6 @@ erDiagram
     Customer ||--o{ FavoriteProduct: has
     Customer ||--o{ WishProduct: has
     Customer ||--o{ ProductReview: writes
-    Customer ||--|| Checkout: has
 
     Customer{
         int id PK
@@ -27,12 +26,6 @@ erDiagram
         int customer_id FK
     }
 
-    Checkout ||--|{ OrderItem: has
-    Checkout{
-        int id PK
-        int orderItem_id FK
-    }
-
 
     Product |{--|| ProductCategory: belongsTo
     Product ||--o{ ProductTag: has
@@ -48,14 +41,15 @@ erDiagram
     }
 
     OrderItem |{--|| Product: belongsTo
+    OrderItem |{--|| Order: belongsTo
     OrderItem{
         int id PK
         int quantity
         int price
+        int order_id FK
         int product_id FK
     }
 
-    Order ||--|{ OrderItem: has
     Order{
         int id PK
         string orderNumber
