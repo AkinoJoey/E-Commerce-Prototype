@@ -1,10 +1,11 @@
 ```mermaid
 erDiagram
-    Customer ||--|| ShoppingCart: has
     Customer ||--|| Address: has
     Customer ||--o{ Order: places
     Customer ||--o{ FavoriteProduct: has
     Customer ||--o{ WishProduct: has
+    Customer ||--o{ ProductReview: writes
+    Customer ||--|| Checkout: has
 
     Customer{
         int id PK
@@ -23,39 +24,44 @@ erDiagram
         string city
         string streetAddress
         string streetAddress_2
-
+        int customer_id FK
     }
 
-    ShoppingCart ||--o{ Item: contains
-    ShoppingCart{
+    Checkout ||--|{ OrderItem: has
+    Checkout{
         int id PK
-        int user_id FK
-        int item_id FK
+        int orderItem_id FK
     }
+
 
     Product |{--|| ProductCategory: belongsTo
+    Product ||--o{ ProductTag: has
+
     Product{
         int id PK
         string name
         int price
         int availableItemCount
         string description
+        int tag_id FK
         int category_id FK
     }
 
-    Item |{--|| Product: belongsTo
-    Item{
+    OrderItem |{--|| Product: belongsTo
+    OrderItem{
         int id PK
         int quantity
         int price
         int product_id FK
     }
 
-    Order ||--|{ Item: contains
+    Order ||--|{ OrderItem: has
     Order{
         int id PK
         string orderNumber
         date orderDate
+        int orderItem_id FK
+        int customer_id FK
     }
 
     ProductCategory{
@@ -67,8 +73,13 @@ erDiagram
     OrderLog ||--|{ Order: belongsTo
     OrderLog{
         int id PK
-        int order_id FK
         string status
+    }
+
+    Receipt ||--|| Order: belongsTo
+    Receipt{
+        int id PK
+        int order_id FK
     }
 
     ProductReview }o--|| Product: about
@@ -76,20 +87,42 @@ erDiagram
         int id PK
         int rating
         string review
-        int user_id FK
+        int customer_id FK
+        int product_id FK
     }
 
+    FavoriteProduct ||--|| Product: belongsTo
     FavoriteProduct{
         int id PK
-        int user_id FK
+        int customer_id FK
         int product_id FK
     }
 
+    WishProduct ||--|| Product: belongsTo
     WishProduct{
         int id PK
-        int user_id FK
+        int customer_id FK
         int product_id FK
     }
 
+    Payment ||--|| Order: belongsTo
+    Payment{
+        int id PK
+        string status
+        int amount
+        int order_id FK
+    }
+
+    Tag{
+        int id PK
+        string name 
+    }
+
+    ProductTag o{--|| Tag: belongsTo 
+    ProductTag{
+        int id PK
+        int product_id FK
+        int tag_id FK
+    }
 
 ```
