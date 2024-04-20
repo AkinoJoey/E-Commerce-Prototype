@@ -5,15 +5,46 @@ erDiagram
     Customer ||--o{ FavoriteProduct: has
     Customer ||--o{ WishProduct: has
     Customer ||--o{ ProductReview: writes
+    Customer ||--|| CustomerAccount: has
 
     Customer{
+        int id PK
+        int customer_account_id FK
+        int address_id FK
+    }
+
+    Guest ||--|| Address: has
+    Guest ||--|{ Order: places
+    Guest{
+        int id PK
+        string email 
+        int address_id FK
+    }
+
+    CustomerAccount{
         int id PK
         string userName
         string name
         string password
         string status
         string email
-        id address_id FK
+    }
+
+    Admin ||--|| Address: has
+    Admin ||--|| AdminAccount: has
+    Admin{
+        int id PK
+        int admin_account_id FK
+        int address_id FK
+    }
+
+    AdminAccount{
+        int id PK
+        string userName
+        string name
+        string password
+        string status
+        string email
     }
 
     Address{
@@ -23,7 +54,6 @@ erDiagram
         string city
         string streetAddress
         string streetAddress_2
-        int customer_id FK
     }
 
 
@@ -36,7 +66,6 @@ erDiagram
         int price
         int availableItemCount
         string description
-        int tag_id FK
         int category_id FK
     }
 
@@ -54,7 +83,6 @@ erDiagram
         int id PK
         string orderNumber
         date orderDate
-        int orderItem_id FK
         int customer_id FK
     }
 
@@ -68,6 +96,7 @@ erDiagram
     OrderLog{
         int id PK
         string status
+        int order_id FK
     }
 
     Receipt ||--|| Order: belongsTo
