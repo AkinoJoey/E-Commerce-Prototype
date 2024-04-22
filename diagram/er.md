@@ -32,6 +32,8 @@ erDiagram
 
     Admin ||--|| Address: has
     Admin ||--|| AdminAccount: has
+    Admin ||--o{ Product: add
+
     Admin{
         int id PK
         int admin_account_id FK
@@ -67,6 +69,7 @@ erDiagram
         int availableItemCount
         string description
         int category_id FK
+        int admin_id FK
     }
 
     OrderItem |{--|| Product: belongsTo
