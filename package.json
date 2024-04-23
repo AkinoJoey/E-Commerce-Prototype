@@ -1,5 +1,15 @@
 {
-  "dependencies": {
-    "flowbite": "^2.3.0"
-  }
+	"dependencies": {
+		"flowbite": "^2.3.0"
+	},
+	"devDependencies": {
+		"@angular-eslint/template-parser": "^17.3.0",
+		"eslint": "^8.0.0",
+		"eslint-plugin-tailwindcss": "^3.15.1"
+	},
+	"scripts": {
+		"lint": "eslint ./app",
+		"lint:debug": "eslint ./app --debug",
+		"lint:fix": "eslint ./app --fix"
+	}
 }
